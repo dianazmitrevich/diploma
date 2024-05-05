@@ -4,43 +4,63 @@
 
               <div class="bonnet">
                 <div class="bonnet__wrapper container">
-                  <div class="bonnet__line">Главная / Темы / <?php echo $this->topic->getName(); ?></div>
+                  <div class="bonnet__line">Главная - Темы - <?php echo $this->topic->getName(); ?></div>
                   <div class="bonnet__title h2"><?php echo $this->topic->getName(); ?></div>
                 </div>
               </div>
               <div class="questions-filter filter">
-                <div class="filter__wrapper container">
-                  <div class="filter__cages checkboxes-ajax" data-id="126" data-url="/ajax/api.php" data-element="126" data-api="questions">
-                    <div class="filter__cage cage">
-                      <div class="cage__title">Технологии</div>
-                      <div class="cage__wrap">
-                        <div class="cage__boxes">
-                          <input type="hidden" name="filter_techs" value="<?php echo $this->getTechIds(); ?>">
-                          <?php foreach ($this->topic->getTechs() as $key => $value) {?>
-                            <div class="checkbox">
-                              <input type="checkbox" name="" checked id="tech_<?php echo $value['id_tech']; ?>" data-id="<?php echo $value['id_tech']; ?>">
-                            <label for="tech_<?php echo $value['id_tech']; ?>"><?php echo $value['name']; ?></label>
-                          </div>
-                          <?php } ?>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="filter__cage cage">
-                      <div class="cage__title">Уровень</div>
-                      <div class="cage__wrap">
-                        <div class="cage__boxes">
-                          <input type="hidden" name="filter_levels" value="<?php echo $this->getLevelsIds(); ?>">
-                          <?php foreach ($this->topic->getLevels() as $key => $value) {?>
-                            <div class="checkbox">
-                              <input type="checkbox" name="" checked id="level_<?php echo $value['id_level']; ?>" data-id="<?php echo $value['id_level']; ?>">
-                            <label for="level_<?php echo $value['id_level']; ?>"><?php echo $value['name']; ?></label>
-                          </div>
-                          <?php } ?>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                              <div class="filter__wrapper container">
+                                <div class="filter__tabs tabs">
+                                    <div class="tabs__upper">
+                                        <div class="tabs__item selected" data-detail="1">Технологии</div>
+                                        <div class="tabs__item" data-detail="2">Уровень</div>
+                                        <!-- <div class="tabs__item" data-detail="3">Компании</div> -->
+                                    </div>
+                                    <div class="tabs__lower checkboxes-ajax" data-id="126" data-url="/ajax/api.php" data-element="126" data-api="questions">
+                                        <div class="tabs__detail detail selected" data-detail="1">
+                                            <div class="detail__boxes">
+                                              <input type="hidden" name="filter_techs" value="<?php echo $this->getTechIds(); ?>">
+                                              <?php foreach ($this->topic->getTechs() as $key => $value) {?>
+                                                <div class="checkbox">
+                                                  <input type="checkbox" name="" checked id="tech_<?php echo $value['id_tech']; ?>" data-id="<?php echo $value['id_tech']; ?>">
+                                                <label for="tech_<?php echo $value['id_tech']; ?>"><?php echo $value['name']; ?></label>
+                                              </div>
+                                              <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="tabs__detail detail" data-detail="2">
+                                            <div class="detail__boxes">
+                                              <input type="hidden" name="filter_levels" value="<?php echo $this->getLevelsIds(); ?>">
+                                              <?php foreach ($this->topic->getLevels() as $key => $value) {?>
+                                                <div class="checkbox">
+                                                  <input type="checkbox" name="" checked id="level_<?php echo $value['id_level']; ?>" data-id="<?php echo $value['id_level']; ?>">
+                                                <label for="level_<?php echo $value['id_level']; ?>"><?php echo $value['name']; ?></label>
+                                              </div>
+                                              <?php } ?>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="tabs__detail detail" data-detail="3">
+                                            <div class="detail__boxes">
+                                                <div class="checkbox"><input type="checkbox" name="" id="c_6"><label
+                                                        for="c_6">EPAM Systems</label></div>
+                                                <div class="checkbox"><input type="checkbox" name="" id="c_7"><label
+                                                        for="c_7">Modsen</label></div>
+                                                <div class="checkbox"><input type="checkbox" name="" id="c_8"><label
+                                                        for="c_8">LeverX</label></div>
+                                                <div class="checkbox"><input type="checkbox" name="" id="c_9"><label
+                                                        for="c_9">IBA GROUP</label></div>
+                                                <div class="checkbox"><input type="checkbox" name="" id="c_10"><label
+                                                        for="c_10">Melsoft</label></div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="filter__text">
+                                    <p>Выбранные технологии: Xamarin</p>
+                                    <p>Выбранные уровни: -</p>
+                                    <p>Выбранные компании: -</p>
+                                </div>
+                            </div>
               </div>
               <div class="questions-list list">
                 <div class="list__wrapper container">

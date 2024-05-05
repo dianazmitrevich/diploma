@@ -255,6 +255,29 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    let tabs = document.querySelectorAll(".tabs");
+    if (tabs) {
+        tabs.forEach(element => {
+            let items = element.querySelectorAll(".tabs__item");
+            let details = element.querySelectorAll(".tabs__detail");
+
+            items.forEach(item => {
+                item.addEventListener("click", () => {
+                    items.forEach(itemInner => {
+                        itemInner.classList.remove("selected");
+                    });
+
+                    item.classList.add("selected");
+
+                    details.forEach(detailInner => {
+                        detailInner.classList.remove("selected");
+                    });
+
+                    element.querySelector(".tabs__detail[data-detail='" + item.getAttribute("data-detail") + "']").classList.add("selected");
+                });
+            });
+        });
+    }
 });
 
 const updateMultiItems = (element, hiddenInput, multiContainer) => {
