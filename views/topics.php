@@ -22,7 +22,7 @@
                   </div>
                 </div>
               </div>
-              <div class="theme-list theme">
+              <div class="theme-list theme content-block">
                 <div class="theme__wrapper container">
                   <div id="123">
                     <?php foreach($this->topic->readMainTopics() as $key => $value) { 

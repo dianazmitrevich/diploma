@@ -21,13 +21,9 @@
                     <div class="header__row">
                         <div class="header__col">
                             <div class="header__links">
-                                <?php if ($this->getAuth()) { ?>
                                 <a href="/progress">Прогресс</a>
-                                <?php } else { ?>
-                                    <a class="btn-ajax" data-url="/ajax/popup.php" data-id="435">Прогресс</a>
-                                <?php } ?>
                                 <?php if ($this->getAuth()) { ?>
-                                <a href="/topics">Темы</a>
+                                <a href="/my-questions">Мои вопросы</a>
                                 <?php } else { ?>
                                     <a class="btn-ajax" data-url="/ajax/popup.php" data-id="435">Темы</a>
                                 <?php } ?>
@@ -54,27 +50,28 @@
                 <aside class="aside">
                     <div class="aside__wrapper">
                         <div class="aside__row">
-                            <div class="aside__col aside__col-upper"><a class="aside__logo" href="/"><img
-                                        src="/resources/img/logo.svg" alt=""></a>
+                            <div class="aside__col aside__col-upper">
+                                <a class="aside__logo" href="/topics">
+                                    <img src="/resources/img/logo.svg" alt=""></a>
                                 <div class="aside__links">
                                     <a class="aside__link" href="/">
                                         <div class="link-img"><img src="/resources/img/aside-1.svg" alt=""></div>
                                         <p>Главная</p>
                                     </a>
                                     <?php if ($this->getAuth()) { ?>
-                                        <a class="aside__link" href="/my-questions">
+                                        <a class="aside__link" href="/topics">
                                             <div class="link-img"><img src="/resources/img/aside-2.svg" alt=""></div>
-                                            <p>Мои вопросы</p>
+                                            <p>Темы</p>
                                         </a>
-                                        <a class="aside__link" href="/progress">
+                                        <!-- <a class="aside__link" href="/progress">
                                             <div class="link-img"><img src="/resources/img/aside-3.svg" alt=""></div>
-                                            <p>Прогресс</p>
-                                        </a>
+                                            <p>Навигация</p>
+                                        </a> -->
                                     <?php } ?>
-                                    <a class="aside__link" href="/vacancies">
+                                    <!-- <a class="aside__link" href="/vacancies">
                                         <div class="link-img"><img src="/resources/img/aside-4.svg" alt=""></div>
                                         <p>Вакансии</p>
-                                    </a>
+                                    </a> -->
                                 </div>
                             </div>
                             <div class="aside__col aside__col-lower">

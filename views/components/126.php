@@ -1,31 +1,39 @@
-                  <?php
-                    $filter_tech = [];
-                    $filter_levels = [];
-                    foreach($data as $key => $value) {
-                      if (in_array($value->technology_id, $checks['filter_techs'])) {
-                        $filter_tech[] = $value->question_id;
+                <?php
+                function filterQuestions($data, $selectedTechIds, $selectedLevelIds) {
+                  if (empty($selectedTechIds[0]) && empty($selectedLevelIds[0])) {
+                      return array_intersect_key($data, array_unique(array_column($data, 'question_id')));
+                  }
+
+                  $filteredData = [];
+
+                  foreach ($data as $row) {
+                      $levelId = $row->id_level;
+                      $tags = $row->tags;
+
+                      if (!empty($selectedLevelIds[0]) && !in_array($levelId, $selectedLevelIds)) {
+                          continue;
                       }
 
-                      if (in_array($value->id_level, $checks['filter_levels'])) {
-                        $filter_levels[] = $value->question_id;
+                      if (!empty($selectedTechIds[0])) {
+                          $questionTechIds = array_map(function($tag) { return $tag->id_tech; }, $tags);
+                          if (count(array_intersect($questionTechIds, $selectedTechIds)) != count($selectedTechIds)) {
+                              continue;
+                          }
                       }
-                    }
 
-                    $intersect = array_intersect($filter_tech, $filter_levels);
-                    $intersect = array_unique($intersect);
-                  ?>
-                  <?php foreach ($data as $key => $value) {
-                    if (in_array($value->question_id, $intersect)) {
-                      $keyword = array_search($value->question_id, $intersect);
-                      if ($keyword !== false) {
-                          unset($intersect[$keyword]);
-                      }
+                      $filteredData[] = $row;
+                  }
+                  
+                  return array_intersect_key($filteredData, array_unique(array_column($filteredData, 'question_id')));
+                }
+    
+                foreach (filterQuestions($data, $checks['filter_techs'], $checks['filter_levels']) as $key => $value) {
                   ?>
                   <div class="list__item questions-item item">
                       <div class="item__row">
                         <div class="item__col item__col-left">
                           <div class="text-wrap">
-                            <div class="item__title"><?php echo $value->name; ?></div>
+                            <a href="<?php echo $value->subtopic_alias . '/' . $value->alias; ?>" class="item__title"><?php echo $value->name; ?></a>
                             <div class="item__tags">
                               <?php foreach ($value->tags as $inner_key => $inner_value) { ?>
                                 <a class="item__tag"><?php echo $inner_value->name;?></a>
@@ -33,7 +41,7 @@
                               <a class="item__tag-level"><?php echo $value->level_name;?></a>
                             </div>
                           </div>
-                          <div class="item__details">2 голоса&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 ответа</div>
+                          <div class="item__details">? ответа</div>
                         </div>
                         <div class="item__col item__col-right">
                           <div class="text-wrap">
@@ -48,4 +56,4 @@
                         </div>
                       </div>
                     </div>
-                  <?php }} ?>
+                  <?php } ?>

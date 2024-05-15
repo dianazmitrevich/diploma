@@ -51,7 +51,7 @@
                   <div class="list__title h2">Мои темы</div>
                   <div class="list__items">
                     <?php foreach ($this->getMyTopics() as $key => $value) { ?>
-                    <a class="list__item theme-item item"><?php echo $value['name']; ?> <span><?php echo $this->getQuestionsCount($value['id_topic']); ?> вопросов</span></a>
+                    <a class="list__item theme-item item"><?php echo $value['name']; ?><span><?php echo $this->getQuestionsCount($value['id_topic']); ?> вопросов</span></a>
                     <?php } ?>
                   </div>
                   <div class="list__more">

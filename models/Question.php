@@ -178,10 +178,11 @@ class Question extends Model
 
 
     public function getFilteredQuestions() {
-        $query = "SELECT DISTINCT $this->technologies_table.technology_id, $this->technologies_table.question_id, $this->table_name.name, $this->table_name.created_at, d_levels.id_level, d_levels.name as level_name, d_users.username, d_users.rating, d_users.avatar
+        $query = "SELECT DISTINCT d_topics.alias as subtopic_alias, $this->technologies_table.technology_id, $this->technologies_table.question_id, $this->table_name.name, $this->table_name.alias, $this->table_name.created_at, d_levels.id_level, d_levels.name as level_name, d_users.username, d_users.rating, d_users.avatar
         FROM $this->technologies_table
         INNER JOIN $this->table_name ON $this->technologies_table.question_id = $this->table_name.id_question
         INNER JOIN d_levels ON d_levels.id_level = $this->table_name.level_id
+        INNER JOIN d_topics ON d_topics.id_topic = $this->table_name.subtopic_id
         INNER JOIN d_users ON d_users.id_user = $this->table_name.author_id";
 
         if ($result = $this->db->connection->query($query)) {
@@ -237,10 +238,25 @@ class Question extends Model
 
     public function getRepliesList()
     {
-        $query = "SELECT DISTINCT d_replies.id_reply, d_replies.text, d_replies.rating, d_replies.created_at, d_users.avatar, d_users.username, d_users.rating as user_rating
+        $query = "SELECT DISTINCT d_replies.id_reply, d_replies.text, d_replies.rating_l, d_replies.rating_d, d_replies.created_at, d_users.avatar, d_users.username, d_users.rating as user_rating, d_replies.question_id
         FROM $this->replies_table
         INNER JOIN d_users ON d_replies.author_id = d_users.id_user
-        WHERE question_id=" . $this->getId();
+        WHERE question_id=" . $this->getId() . " AND reply_id IS NULL";
+
+        if ($result = $this->db->connection->query($query)) {
+            $output = $result->fetch_all(MYSQLI_ASSOC);
+
+        }
+        
+        return $result ? $output : [];
+    }
+
+    public function getSubReplies($id_reply)
+    {
+        $query = "SELECT DISTINCT d_replies.id_reply, d_replies.text, d_replies.rating_l, d_replies.rating_d, d_replies.created_at, d_users.avatar, d_users.username, d_users.rating as user_rating, d_replies.question_id
+        FROM $this->replies_table
+        INNER JOIN d_users ON d_replies.author_id = d_users.id_user
+        WHERE reply_id=" . $id_reply;
 
         if ($result = $this->db->connection->query($query)) {
             $output = $result->fetch_all(MYSQLI_ASSOC);
@@ -255,51 +271,4 @@ class Question extends Model
 
         return $this->db->connection->query($query);
     }
-
-
-    // private $id;
-    // private $imageId;
-
-    // public function setId(int $id)
-    // {
-    //     $this->id = $id;
-    // }
-    // public function setImageId(int $imageId)
-    // {
-    //     $this->imageId = $imageId;
-    // }
-
-    // public function getId()
-    // {
-    //     return $this->id;
-    // }
-    // public function getImageId()
-    // {
-    //     return $this->imageId;
-    // }
-
-    // public function delete(int $id)
-    // {
-    //     $query = "DELETE FROM Technologies WHERE technology_id = $id";
-    //     $this->db->connection->query($query);
-
-
-    //     $query = "DELETE FROM TechnologiesList WHERE id = $id";
-
-    //     return $this->db->connection->query($query);
-    // }
-
-    // public function edit(int $id, array $data)
-    // {
-    //     $query = "UPDATE TechnologiesList SET `image_id`=" . $data['techImage'] . " WHERE id=$id";
-
-    //     return $this->db->connection->query($query);
-    // }
-
-    // public function add(array $data)
-    // {
-    //     $query = "INSERT INTO TechnologiesList (`image_id`) VALUES (" . $data['techImage'] . ")";
-
-    //     $this->db->connection->query($query);
-    // }
 }

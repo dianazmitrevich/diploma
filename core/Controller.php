@@ -5,6 +5,8 @@ namespace app\core;
 use app\lib\Database;
 use app\models\Topic;
 use app\models\User;
+use DateTime;
+use IntlDateFormatter;
 
 abstract class Controller
 {
@@ -38,7 +40,31 @@ abstract class Controller
         }
     }
 
-    public function readAll() {
-        return (new Topic())->readAll('d_topics');
+    // public function formatDate(string $timestamp): string {
+    //     $date = new DateTime($timestamp);
+    //     $formatter = new IntlDateFormatter('ru_RU', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Moscow', IntlDateFormatter::GREGORIAN, 'd MMMM HH:mm');
+    //     return $formatter->format($date);
+    // }
+
+    public function formatDate($timestamp){
+        $date = new DateTime($timestamp);
+        $now = new DateTime();
+        $interval = $date->diff($now);
+    
+        if ($interval->y >= 1) {
+            return $date->format('d m Y');
+        } elseif ($interval->m >= 1) {
+            return $interval->m . 'м';
+        } elseif ($interval->d >= 7) {
+            return floor($interval->d / 7) . 'нд';
+        } elseif ($interval->d >= 1) {
+            return $interval->d . 'дн';
+        } elseif ($interval->h >= 1) {
+            return $interval->h . 'ч';
+        } elseif ($interval->i >= 1) {
+            return $interval->i . 'мин';
+        } else {
+            return $interval->s . 'с';
+        }
     }
 }

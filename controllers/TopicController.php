@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Controller;
 use app\models\Level;
 use app\models\Question;
+use app\models\Reply;
 use app\models\Technology;
 use app\models\Topic;
 use app\models\User;
@@ -16,6 +17,7 @@ class TopicController extends Controller
     public $question;
     public $technology;
     public $level;
+    public $reply;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class TopicController extends Controller
         $this->question = new Question();
         $this->technology = new Technology();
         $this->level = new Level();
+        $this->reply = new Reply();
     }
 
     public function render($nesting)
@@ -39,12 +42,6 @@ class TopicController extends Controller
                 $this->topic->setQuestions($this->topic->findAllQuestions());
                 $this->topic->setTechs($this->topic->findAllTechs());
                 $this->topic->setLevels($this->topic->findAllLevels());
-
-                // echo '<pre>';
-                // print_r($this->topic->findAllLevels());
-                // echo '</pre>';
-
-
                 require_once 'views/templates/topic.php';
             }
         }
@@ -63,35 +60,6 @@ class TopicController extends Controller
         else {
             require_once 'views/topics.php';
         }
-    }
-
-    public function getJson($flag)
-    {
-        // switch($flag) {
-        //     case 'main_topics': {
-        //         $main_topics = $this->topic->readMainTopics();
-
-        //         foreach ($main_topics as $key => $row) {
-        //             $main_topics[$key]['subtopics'] = $this->topic->readSubTopics($row['id_topic']);
-        //         }
-                
-        //         echo json_encode($main_topics);
-        //         break;
-        //     }
-        //     case 'questions': {
-        //         break;
-        //     }
-        // }
-
-        var_dump(json_decode(file_get_contents($_SERVER['HTTP_REFERER'] . 'api/main_topics'), FILE_USE_INCLUDE_PATH));
-
-        // $main_topics = $this->topic->readMainTopics();
-
-        //         foreach ($main_topics as $key => $row) {
-        //             $main_topics[$key]['subtopics'] = $this->topic->readSubTopics($row['id_topic']);
-        //         }
-                
-        //         echo json_encode($main_topics);
     }
 
     public function getTopicsIds()

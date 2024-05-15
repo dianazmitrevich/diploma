@@ -200,53 +200,6 @@ class Topic extends Model
         return $result ? count($output) : 0;
     }
 
-
-    // private $id;
-    // private $imageId;
-
-    // public function setId(int $id)
-    // {
-    //     $this->id = $id;
-    // }
-    // public function setImageId(int $imageId)
-    // {
-    //     $this->imageId = $imageId;
-    // }
-
-    // public function getId()
-    // {
-    //     return $this->id;
-    // }
-    // public function getImageId()
-    // {
-    //     return $this->imageId;
-    // }
-
-    // public function delete(int $id)
-    // {
-    //     $query = "DELETE FROM Technologies WHERE technology_id = $id";
-    //     $this->db->connection->query($query);
-
-
-    //     $query = "DELETE FROM TechnologiesList WHERE id = $id";
-
-    //     return $this->db->connection->query($query);
-    // }
-
-    // public function edit(int $id, array $data)
-    // {
-    //     $query = "UPDATE TechnologiesList SET `image_id`=" . $data['techImage'] . " WHERE id=$id";
-
-    //     return $this->db->connection->query($query);
-    // }
-
-    // public function add(array $data)
-    // {
-    //     $query = "INSERT INTO TechnologiesList (`image_id`) VALUES (" . $data['techImage'] . ")";
-
-    //     $this->db->connection->query($query);
-    // }
-
     public function add($name, $main_topic, $author_id) {
         function transliterate($input) {
             $cyrillic = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'];

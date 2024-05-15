@@ -13,45 +13,6 @@ class ReplyController extends Controller
     public function __construct()
     {
         $this->reply = new Reply();
-        $this->user = new Reply();
-    }
-
-    public function render()
-    {
-        require_once 'views/profile.php';
-    }
-
-    public function edit()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $error = [];
-
-            if ($_POST['role'] == 'U') {
-                $avatar = $_FILES['avatar'];
-                $full_name = $_POST['full_name'];
-                $email = $_POST['email'];
-                $login = $_POST['login'];
-
-                if ($this->getUser()) {
-                    if ($avatar['name']) {
-                        $avatar = $this->uploadFile($avatar, 'img');
-                        if ($avatar) {
-                            $this->user->edit($avatar, $full_name, $email, $login, $this->getUser()['id_user']);
-                            $error['ok'] = 1;
-                        } else {
-                            $error['inc'] = 'Ошибка при загрузке файла';
-                        }
-                    } else {
-                        $this->user->edit($this->getUser()['avatar'], $full_name, $email, $login, $this->getUser()['id_user']);
-                        $error['ok'] = 1;
-                    }
-                } else {
-                    $error['inc'] = 'что-то не то';
-                }
-            }
-        }
-
-        echo json_encode($error);
     }
 
     public function add() {
@@ -60,11 +21,16 @@ class ReplyController extends Controller
 
             if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
 
+                if (isset($_POST['reply_id'])) {
+                    $reply_id = $_POST['reply_id'];
+                } else {
+                    $reply_id = null;
+                }
                 $question_id = $_POST['question_id'];
                 $text = $_POST['text'];
 
                 if ($text) {
-                    $this->reply->add($question_id, $text, $this->getUser()['id_user']);
+                    $this->reply->add($question_id, $text, $this->getUser()['id_user'], $reply_id);
                     $error['ok'] = 1;
                 } else {
                     $error['inc'] = 'Текст отзыва не может быть пустым.';
@@ -78,36 +44,42 @@ class ReplyController extends Controller
     public function like() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = [];
-
+    
             if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
-
+    
                 $reply_id = $_POST['question_id'];
                 $user_id = $_POST['user_id'];
+                $action = 'L';
 
-                $this->reply->likeRating($reply_id, $user_id);
-                $error['ok'] = 1;
-                $error['new_rating'] = $this->reply->getRating($reply_id);
+                if ($this->reply->rate($reply_id, $user_id, $action)) {
+                    $error['ok'] = 1;
+                    $error['new_rating_l'] = $this->reply->getRating($reply_id)['new_rating_l'];
+                    $error['new_rating_d'] = $this->reply->getRating($reply_id)['new_rating_d'];
+                }
             }
         }
-
+    
         echo json_encode($error);
     }
-
+    
     public function dislike() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = [];
-
+    
             if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
-
+    
                 $reply_id = $_POST['question_id'];
                 $user_id = $_POST['user_id'];
-
-                $this->reply->dislikeRating($reply_id, $user_id);
-                $error['ok'] = 1;
-                $error['new_rating'] = $this->reply->getRating($reply_id);
+                $action = 'D';
+    
+                if ($this->reply->rate($reply_id, $user_id, $action)) {
+                    $error['ok'] = 1;
+                    $error['new_rating_l'] = $this->reply->getRating($reply_id)['new_rating_l'];
+                    $error['new_rating_d'] = $this->reply->getRating($reply_id)['new_rating_d'];
+                }
             }
         }
-
+    
         echo json_encode($error);
     }
 }

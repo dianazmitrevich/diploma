@@ -1,52 +1,177 @@
 <?php
    require 'views/chunk/header.php';
-?>
-
-              <div class="bonnet">
-                <div class="bonnet__wrapper container">
-                  <div class="bonnet__line">Главная / Темы / <?php echo $this->topic->findById($question['subtopic_id'])['name']; ?> / # <?php echo $this->question->getAlias(); ?></div>
-                  <div class="bonnet__title h2">Вопрос #<?php echo $this->question->getAlias(); ?></div>
+?> <div class="bonnet">
+    <div class="bonnet__wrapper container">
+        <div class="bonnet__line">Главная - Темы -
+            <?php echo $this->topic->findById($question['subtopic_id'])['name']; ?> - #
+            <?php echo $this->question->getAlias(); ?></div>
+    </div>
+</div>
+<div class="questions-single single content-block">
+    <div class="single__wrapper container">
+        <div class="single__item questions-item item">
+            <div class="item__row">
+                <div class="item__col item__col-left">
+                    <div class="text-wrap">
+                        <div class="item__title"><?php echo $question['name']; ?></div>
+                        <div class="item__tags">
+                            <?php foreach ($this->question->getTechnologiesList() as $key => $value) { ?> <a
+                                class="item__tag"><?php echo $value['name']; ?></a> <?php } ?>
+                        </div>
+                    </div>
+                    <div class="item__details"><?php echo count($this->question->getReplies()); ?> ответа</div>
                 </div>
-              </div>
-              <div class="questions-single single content-block">
-                <div class="single__wrapper container">
-                  <div class="single__tags"><a class="single__tag single__tag-level"><?php echo $this->level->findById($question['level_id'])['name']; ?></a></div>
-                  <div class="single__item questions-item item">
-                    <div class="item__row">
-                      <div class="item__col item__col-left">
-                        <div class="text-wrap">
-                          <div class="item__title"><?php echo $question['name']; ?></div>
-                          <div class="item__tags">
-                            <?php foreach ($this->question->getTechnologiesList() as $key => $value) { ?>
-                                <a class="item__tag"><?php echo $value['name']; ?></a>
-                            <?php } ?>
-                        </div>
-                        </div>
-                        <div class="item__details">2 голоса&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 ответа</div>
-                      </div>
-                      <div class="item__col item__col-right">
-                        <div class="text-wrap">
-                          <div class="item__date"><?php echo $question['created_at']; ?></div>
-                          <div class="item__author">
+                <div class="item__col item__col-right">
+                    <div class="text-wrap">
+                        <div class="item__date"><?php echo $this->formatDate($question['created_at']); ?></div>
+                        <div class="item__author">
                             <div class="img-cage"><img src="img/avatar.png" alt=""></div>
-                            <p>@<?php echo $this->user->findById($question['author_id'])['username']; ?>, <span><?php echo $this->user->findById($question['author_id'])['rating']; ?> опыта</span></p>
-                          </div>
+                            <p>@<?php echo $this->user->findById($question['author_id'])['username']; ?>,
+                                <span><?php echo $this->user->findById($question['author_id'])['rating']; ?>
+                                    опыта</span></p>
                         </div>
-                        <div class="item__favourite favourite-btn"></div>
-                      </div>
                     </div>
-                  </div>
-                  <div class="single__desc"><?php echo $question['description']; ?></div>
-                  <div class="single__checkbox checkbox-ajax" data-url="/edit-completed">
-                    <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
-                    <div class="checkbox">
-                      <input <?php if ($this->question->getCompleted()) echo 'checked'; ?> type="checkbox" id="comp_<?php echo $question['id_question']; ?>" data-id="<?php echo $question['id_question']; ?>">
-                      <label for="comp_<?php echo $question['id_question']; ?>">отметить как пройденный</label>
-                    </div>
-                  </div>
+                    <div class="item__favourite favourite-btn"></div>
                 </div>
-              </div>
-              <div class="question-replies replies content-block">
+            </div>
+        </div>
+        <div class="single__desc"><?php echo $question['description']; ?></div>
+        <div class="single__checkbox checkbox-ajax" data-url="/edit-completed">
+            <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
+            <div class="checkbox">
+                <input <?php if ($this->question->getCompleted()) echo 'checked'; ?> type="checkbox"
+                    id="comp_<?php echo $question['id_question']; ?>" data-id="<?php echo $question['id_question']; ?>">
+                <label for="comp_<?php echo $question['id_question']; ?>">отметить как пройденный</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="question-replies replies">
+    <div class="replies__wrapper container">
+        <div class="replies__title">
+            <div class="wrap">
+                <div class="h3"><?php echo count($this->question->getReplies()); ?> ответа</div>
+            </div>
+            <div class="wrap">
+                <div class="replies__sorting sorting select">
+                    <div class="select__item">
+                        <div class="item">
+                            <div class="item__head"><span>Сортировка</span><svg width="10" height="6" viewBox="0 0 10 6"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L5 5L9 1" stroke="#D3D3D3" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg></div>
+                            <div class="item__options"><input type="hidden" name="">
+                                <div class="option-wrap"><input class="item__option" type="radio" name=""
+                                        data-text="По популярности" data-selected-value="1"><label>По
+                                        популярности</label>
+                                </div>
+                                <div class="option-wrap"><input class="item__option" type="radio" name=""
+                                        data-text="Недавние" data-selected-value="2"><label>Недавние</label></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="replies__items">
+            <?php foreach ($this->question->getReplies() as $key => $value) { ?>
+                <div class="replies__item item">
+                <div class="item__row">
+                    <input type="hidden" name="reply_id" value="<?php echo $value['id_reply']; ?>">
+                    <input type="hidden" name="question_id" value="<?php echo $value['question_id']; ?>">
+                    <div class="item__upper">
+                        <div class="item__author">
+                            <div class="item__author-image"><img src="/uploads/img/<?php echo $value['avatar']; ?>"
+                                    alt="">
+                            </div>
+                            <div class="item__author-name">@<?php echo $value['username']; ?></div>
+                        </div>
+                        <div class="item__date"><?php echo $this->formatDate($value['created_at']); ?></div>
+                    </div>
+                    <div class="item__text"><?php echo $value['text']; ?></div>
+                    <div class="item__rate rate">
+                        <div class="rate-up rate-block checkbox-ajax" data-url="/like-reply">
+                            <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
+                            <input
+                                type="checkbox"
+                                <?php if ($this->reply->isReplyRated($value['id_reply'], $this->getUser()['id_user']) && $this->reply->isReplyRated($value['id_reply'], $this->getUser()['id_user'])['parameter'] == 'L') { echo 'checked';} ?>
+                                id="l_<?php echo $value['id_reply']; ?>"
+                                name="n_<?php echo $value['id_reply']; ?>"
+                                data-id="<?php echo $value['id_reply']; ?>"
+                            >
+                            <label for="l_<?php echo $value['id_reply']; ?>"></label>
+                            <p class="rating-like"><?php echo $value['rating_l']; ?></p>
+                        </div>
+                        <div class="rate-down rate-block checkbox-ajax" data-url="/dislike-reply">
+                            <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
+                            <input
+                                type="checkbox" <?php if ($this->reply->isReplyRated($value['id_reply'], $this->getUser()['id_user']) && $this->reply->isReplyRated($value['id_reply'], $this->getUser()['id_user'])['parameter'] == 'D') { echo 'checked';} ?>
+                                id="d_<?php echo $value['id_reply']; ?>"
+                                name="n_<?php echo $value['id_reply']; ?>"
+                                data-id="<?php echo $value['id_reply']; ?>"
+                            >
+                            <label for="d_<?php echo $value['id_reply']; ?>"></label>
+                            <p class="rating-dislike"><?php echo $value['rating_d']; ?></p>
+                        </div>
+                        <div class="rate-reply">Ответить</div>
+                    </div>
+                </div>
+                <?php foreach ($this->question->getSubReplies($value['id_reply']) as $key_inner => $value_inner) { ?>
+                <div class="item__row-sm">
+                    <input type="hidden" name="reply_id" value="<?php echo $value['id_reply']; ?>">
+                    <input type="hidden" name="question_id" value="<?php echo $value['question_id']; ?>">
+                    <div class="item__upper">
+                        <div class="item__author">
+                            <div class="item__author-image">
+                                <img src="/uploads/img/<?php echo $value_inner['avatar']; ?>" alt="">
+                            </div>
+                            <div class="item__author-name">@<?php echo $value_inner['username']; ?></div>
+                        </div>
+                        <div class="item__date"><?php echo $this->formatDate($value_inner['created_at']); ?></div>
+                    </div>
+                    <div class="item__text"><?php echo $value_inner['text']; ?></div>
+                    <div class="item__rate rate">
+                        <div class="rate-up rate-block checkbox-ajax" data-url="/like-reply">
+                            <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
+                            <input
+                                type="checkbox" <?php if ($this->reply->isReplyRated($value_inner['id_reply'], $this->getUser()['id_user']) && $this->reply->isReplyRated($value_inner['id_reply'], $this->getUser()['id_user'])['parameter'] == 'L') { echo 'checked';} ?>
+                                id="l_<?php echo $value_inner['id_reply']; ?>" name="n_<?php echo $value_inner['id_reply']; ?>" data-id="<?php echo $value_inner['id_reply']; ?>">
+                            <label for="l_<?php echo $value_inner['id_reply']; ?>"></label>
+                            <p class="rating-like"><?php echo $value_inner['rating_l']; ?></p>
+                        </div>
+                        <div class="rate-down rate-block checkbox-ajax" data-url="/dislike-reply">
+                            <input type="hidden" value="<?php echo $this->getUser()['id_user'];?>">
+                            <input
+                                type="checkbox" <?php if ($this->reply->isReplyRated($value_inner['id_reply'], $this->getUser()['id_user']) && $this->reply->isReplyRated($value_inner['id_reply'], $this->getUser()['id_user'])['parameter'] == 'D') { echo 'checked';} ?>
+                                id="d_<?php echo $value_inner['id_reply']; ?>" name="n_<?php echo $value_inner['id_reply']; ?>" data-id="<?php echo $value_inner['id_reply']; ?>">
+                            <label for="d_<?php echo $value_inner['id_reply']; ?>"></label>
+                            <p class="rating-dislike"><?php echo $value_inner['rating_d']; ?></p>
+                        </div>
+                        <div class="rate-reply">Ответить</div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<div class="question-reply reply content-block">
+    <div class="reply__wrapper container">
+        <form class="reply__box box" data-url="/add-reply">
+            <div class="box__avatar">
+                <div class="img-cage"><img src="/uploads/img/<?php echo $this->getUser()['avatar']; ?>" alt=""></div>
+            </div>
+            <div class="box__text">
+                <input type="hidden" name="question_id" value="<?php echo $question['id_question']; ?>" required>
+                <input type="text" name="text" placeholder="Введите ответ">
+            </div>
+            <button type="submit" class="btn">Отправить ответ</button>
+        </form>
+    </div>
+</div>
+<!-- <div class="question-replies replies content-block">
                 <div class="replies__wrapper container">
                   <div class="replies__title h3"><?php echo count($this->question->getReplies()); ?> ответа</div>
                   <div class="replies__items">
@@ -91,8 +216,8 @@
                     <?php } ?>
                   </div>
                 </div>
-              </div>
-              <div class="question-reply reply content-block">
+              </div> -->
+<!-- <div class="question-reply reply content-block">
                 <div class="reply__wrapper container">
                   <div class="reply__title h3">Ваш ответ</div>
                   <form class="reply__box box" data-url="/add-reply">
@@ -107,8 +232,6 @@
                     </div>
                   </form>
                 </div>
-              </div>
-
-<?php
+              </div> --> <?php
    require 'views/chunk/footer.php';
 ?>
