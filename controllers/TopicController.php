@@ -108,11 +108,47 @@ class TopicController extends Controller
                 $main_topic = $_POST['main_topic'];
                 $author_id = $_POST['author_id'];
 
-                if ($main_topic) {
-                    $this->topic->add($name, $main_topic, $author_id);
-                    $error['ok'] = 1;
+                $validated_errors = [];
+                $validated_errors = $this->mainValidate(['inc_topic' => $name]);
+                if ($validated_errors) {
+                    $error = $validated_errors;
                 } else {
-                    $error['inc_topic'] = 'Вы не выбрали тему';
+                    if ($main_topic) {
+                        $this->topic->add($name, $main_topic, $author_id);
+                        $error['ok'] = 1;
+                    } else {
+                        $error['inc_topic'] = 'Вы не выбрали тему';
+                    }
+                }
+            }
+        }
+
+        echo json_encode($error);
+    }
+
+    public function remove() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $error = [];
+
+            $topic_id = $_POST['topic_id'];
+
+            // $this->topic->remove($topic_id);
+            $error['ok'] = $this->topic->remove($topic_id);;
+        }
+
+        echo json_encode($error);
+    }
+
+    public function validate() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $error = [];
+
+            if ($this->getUser()['role'] == 'A') {
+                $topic_id = $_POST['topic_id'];
+
+                if ($topic_id) {
+                    $this->topic->validate($topic_id);
+                    $error['ok'] = 1;
                 }
             }
         }

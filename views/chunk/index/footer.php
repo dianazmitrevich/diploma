@@ -1,15 +1,11 @@
                 <footer class="footer">
                     <div class="footer__wrapper container">
                         <div class="col-wrap">
-                            <div class="footer__col"><a class="link" href="page-question.html">Вопрос</a><a
-                                    class="link">Вакансии</a><a class="link">Оставить отзыв</a><a
-                                    class="link">Справка</a></div>
-                            <div class="footer__col"><a class="link">Компании</a><a class="link"
-                                    href="page-questions.html">Вопросы</a><a class="link">Позиции</a><a
-                                    class="link">Темы</a></div>
-                            <div class="footer__col"><a class="link" href="page-my-questions.html">Мои вопросы</a><a
-                                    class="link" href="page-profile.html">Профиль</a><a class="link"
-                                    href="page-profile-recruiter.html">Профиль рекрутера</a></div>
+                            <div class="footer__col">
+                                <a class="link" href="/">Главная</a>
+                                <a class="link" href="/vacancies">Вакансии</a>
+                                <a class="link" href="/topics">Темы</a>
+                            </div>
                         </div>
                         <div class="footer__credentials">
                             <div class="footer__logo"><img src="img/logo.svg" alt=""></div>
@@ -17,6 +13,7 @@
                         </div>
                     </div>
                 </footer>
+                <div class="popups"></div>
             </main>
         </div>
     </div>

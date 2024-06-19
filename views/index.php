@@ -1,3 +1,4 @@
+<title><?php echo 'Подготовка к собеседованиям в IT с полным погружением – Hackora'; ?></title>
 <?php
    require 'chunk/index/header.php';
 ?>
@@ -11,11 +12,16 @@
                             <div class="header__col-logo"><img src="/resources/img/logo.svg" alt=""></div>
                             <nav class="header__col-nav">
                                 <a href="/topics">Темы</a>
-                                <a href="/progress">Мой прогресс</a>
-                                <a href="">Навигация</a>
+                                <!-- <a href="">Навигация</a> -->
                                 <a href="/vacancies">Вакансии</a></nav>
                         </div>
-                        <div class="header__col"><a href="/profile" class="btn btn-grey">Войти</a></div>
+                        <div class="header__col">
+                            <?php if ($this->getAuth()) { ?>
+                            <a href="/profile" class="btn btn-grey">Войти</a>
+                            <?php } else { ?>
+                            <a class="btn btn-grey btn-ajax" data-url="/ajax/popup.php" data-id="435">Войти</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -45,13 +51,16 @@
                         <div class="profile__row">
                             <div class="profile__col">
                                 <div class="profile__title">Ваш личный кабинет для подготовки</div>
-                                <div class="profile__text">Они прошли специальное внутреннее обучение, сдали экзамен
-                                    и готовы справиться с чем угодно. Понятно объяснят любую тему: от глагола
-                                    to be до косвенной речиПомогут решить практические задачи: например, подготовят
-                                    к собеседованию</div>
+                                <div class="profile__text">Добавляйте вопросы в избранное и отмечайте вопросы пройденными. Отслеживайте прогресс и становитесь лучшими в топе обучающихся</div>
                             </div>
-                            <div class="profile__col profile__col-right"><a href="/profile" class="btn">Перейти</a><img
-                                    src="/resources/img/index-profile.png" alt=""></div>
+                            <div class="profile__col profile__col-right">
+                                <?php if ($this->getAuth()) { ?>
+                                <a href="/profile" class="btn">Перейти</a>
+                                <?php } else { ?>
+                                <a class="btn btn-ajax" data-url="/ajax/popup.php" data-id="435">Перейти</a>
+                                <?php } ?>
+                                <img src="/resources/img/index-profile.png" alt="">
+                            </div>
                         </div>
                     </div>
                 </section>

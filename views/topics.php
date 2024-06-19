@@ -1,10 +1,11 @@
+<title><?php echo 'Темы – Hackora'; ?></title>
 <?php
    require 'chunk/header.php';
 ?>
 
             <div class="bonnet">
                 <div class="bonnet__wrapper container">
-                  <div class="bonnet__line">Главная / Темы</div>
+                  <div class="bonnet__line">Главная - Темы</div>
                   <div class="bonnet__title h2">Темы</div>
                 </div>
               </div>
@@ -32,16 +33,22 @@
                       <div class="theme__title h3"><?php echo $value['name'] ?></div>
                       <div class="theme__items">
                         <?php foreach($this->topic->readSubTopics($value['id_topic']) as $key_inner => $value_inner) { ?>
-                        <a href="/topics/<?php echo $value_inner['alias'] . '?main_topic=' . $value['id_topic']; ?>" class="theme__item theme-item item"><?php echo $value_inner['name'] ?></a>
+                        <a href="/topics/<?php echo $value_inner['alias'] . '?main_topic=' . $value['id_topic']; ?>" class="theme__item theme-item item">
+                          <?php echo $value_inner['name'] ?>
+                          <span><?php echo $this->topic->getQuestionsCount($value_inner['id_topic']); ?> вопроса</span>
+                          <?php if ($this->topic->isValidated($value_inner['id_topic'])) { ?><p class="validated"></p><?php } ?>
+                        </a>
                         <?php } ?>
                       </div>
                     </div>
                       <?php }} ?>
                   </div>
+                  <?php if ($this->getAuth() && !$this->getUser()['document_url']) { ?>
                   <div class="theme__more">
                     <p>Не нашли подходящую тему? Тогда можно создать новую!</p>
                     <div class="btn btn-ajax" data-url="/ajax/popup.php" data-id="438" data-api="main_topics" data-user="<?php echo $this->getAuth(); ?>">Добавить тему</div>
                   </div>
+                  <?php } ?>
                 </div>
               </div>
 

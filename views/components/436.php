@@ -1,4 +1,4 @@
-                    <div class="popup">
+                    <div class="popup reg">
                         <div class="popup-wrap show"></div>
                         <div class="popup__wrap show">
                             <div class="wrap wrap-register">
@@ -8,16 +8,16 @@
                                 </div>
                                 <div class="popup__inner inner">
                                     <div class="inner__tabs">
-                                        <div class="inner__tab inner__tab-selected" data-element="1">Рекрутерам</div>
-                                        <div class="inner__tab" data-element="2">Соискателям</div>
+                                        <div class="inner__tab" data-element="1">Рекрутер</div>
+                                        <div class="inner__tab inner__tab-selected" data-element="2">Соискатель</div>
                                     </div>
                                     <div class="inner__details">
-                                        <div class="inner__detail inner__detail-selected" data-element="1">
+                                        <div class="inner__detail" data-element="1">
                                             <form class="popup__form d_form" data-url="/register">
                                                 <input type="hidden" name="role" value="R">
-                                                <div class="form__field"><label>Имя и фамилия
-                                                        <span>*</span></label><input type="text" name="full_name"
-                                                        placeholder="Селин Диор" required>
+                                                <div class="form__field">
+                                                    <label>Имя и фамилия <span>*</span></label>
+                                                    <input type="text" name="full_name" placeholder="Селин Диор" required>
                                                     <div class="field-invalid inc_full_name">
                                                         <div class="invalid-wrap"><svg width="16" height="15"
                                                                 viewBox="0 0 16 15" fill="none"
@@ -39,7 +39,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form__field"><label>Почта <span>*</span></label><input
-                                                        type="email" name="email" placeholder="email@mail.com">
+                                                        type="email" name="email" placeholder="email@mail.com" required>
                                                     <div class="field-invalid inc_email" required>
                                                         <div class="invalid-wrap"><svg width="16" height="15"
                                                                 viewBox="0 0 16 15" fill="none"
@@ -60,48 +60,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form__field form__field-select"><label>Компания
-                                                        <span>*</span></label>
-                                                    <div class="select">
-                                                        <div class="select__item">
-                                                            <div class="item">
-                                                                <div class="item__head"><span>Выберите
-                                                                        компанию</span><svg width="10" height="6"
-                                                                        viewBox="0 0 10 6" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M1 1L5 5L9 1" stroke="#D3D3D3"
-                                                                            stroke-width="2" stroke-linecap="round"
-                                                                            stroke-linejoin="round" />
-                                                                    </svg></div>
-                                                                <div class="item__options">
-                                                                    <input type="hidden" name="company_id">
-                                                                    <div class="option-wrap"><input class="item__option"
-                                                                            type="radio" name="343624"
-                                                                            data-text="Frontend разработчик"
-                                                                            data-selected-value="1"><label>Frontend
-                                                                            разработчик</label></div>
-                                                                    <div class="option-wrap"><input class="item__option"
-                                                                            type="radio" name="343624"
-                                                                            data-text="Backend разработчик"
-                                                                            data-selected-value="2"><label>Backend
-                                                                            разработчик</label></div>
-                                                                    <div class="option-wrap"><input class="item__option"
-                                                                            type="radio" name="343624" data-text="gregr"
-                                                                            data-selected-value="4"><label>gregr</label>
-                                                                    </div>
-                                                                    <div class="option-wrap"><input class="item__option"
-                                                                            type="radio" name="343624"
-                                                                            data-text="gergreger5t43"
-                                                                            data-selected-value="5"><label>gergreger5t43</label>
-                                                                    </div>
-                                                                    <div class="option-wrap"><input class="item__option"
-                                                                            type="radio" name="343624" data-text="vfdvdv"
-                                                                            data-selected-value="6"><label>vfdvdv</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="form__field form__field-hinted hinted-company">
+                                                    <label>Компания<span>*</span></label>
+                                                    <input type="hidden" name="company_id">
+                                                    <input type="text" name="company" placeholder="Название компании" required>
                                                     <div class="field-invalid inc_company">
                                                         <div class="invalid-wrap"><svg width="16" height="15"
                                                                 viewBox="0 0 16 15" fill="none"
@@ -201,7 +163,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="inner__detail" data-element="2">
+                                        <div class="inner__detail inner__detail-selected" data-element="2">
                                             <form class="popup__form d_form" data-url="/register">
                                                 <input type="hidden" name="role" value="U">
                                                 <div class="form__field"><label>Имя и фамилия

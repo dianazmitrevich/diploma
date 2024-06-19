@@ -26,7 +26,7 @@ class Completed extends Model
     }
 
     public function getCompleted($user_id) {
-        $query = "SELECT d_levels.name as level_name, d_users.username, d_users.avatar, d_users.rating, d_completed.question_id, d_completed.user_id, d_questions.name, d_questions.created_at, d_questions.alias, d_topics.alias as subtopic_alias
+        $query = "SELECT d_questions.id_question, d_levels.name as level_name, d_users.username, d_users.avatar, d_users.rating, d_users.role, d_completed.question_id, d_completed.user_id, d_questions.name, d_questions.created_at, d_questions.alias, d_topics.alias as subtopic_alias
         FROM d_completed
         INNER JOIN d_questions ON d_completed.question_id=d_questions.id_question
         INNER JOIN d_topics ON d_topics.id_topic = d_questions.subtopic_id
@@ -36,6 +36,20 @@ class Completed extends Model
 
         if ($result = $this->db->connection->query($query)) {
             $output = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        return $result ? $output : [];
+    }
+
+    public function getTopicCompleted($checked_topics, $user_id) {
+        $query = "SELECT COUNT(*) as count
+        FROM d_completed 
+        JOIN d_questions ON d_completed.question_id = d_questions.id_question 
+        WHERE d_completed.user_id = $user_id 
+        AND FIND_IN_SET(d_questions.subtopic_id, '$checked_topics') > 0;";
+
+        if ($result = $this->db->connection->query($query)) {
+            $output = $result->fetch_assoc();
         }
 
         return $result ? $output : [];

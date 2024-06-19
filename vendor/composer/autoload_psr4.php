@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'app\\' => array($baseDir . '/'),
+    'Wkhooy\\' => array($vendorDir . '/vearutop/php-obscene-censor-rus/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

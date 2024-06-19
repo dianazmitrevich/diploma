@@ -6,6 +6,7 @@ use app\controllers\APIController;
 use app\controllers\MainController;
 use app\controllers\AuthController;
 use app\controllers\CompletedController;
+use app\controllers\FavouriteController;
 use app\controllers\MyQuestionsController;
 use app\controllers\ProfileController;
 use app\controllers\ProgressController;
@@ -39,7 +40,8 @@ class Router
             'ProfileController' => (new ProfileController),
             'ProgressController' => (new ProgressController),
             'VacancyController' => (new VacancyController),
-            'CompletedController' => (new CompletedController)
+            'CompletedController' => (new CompletedController),
+            'FavouriteController' => (new FavouriteController)
         ];
     }
 

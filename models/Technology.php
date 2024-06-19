@@ -40,4 +40,28 @@ class Technology extends Model
 
         return $this->db->connection->query($query);
     }
+
+    public function add($data) {
+        $query = "INSERT INTO d_technologies (`name`) VALUES ";
+    
+        foreach ($data as $key => $value) {
+            $query .= "('$value'),";
+        }
+    
+        $query = substr($query, 0, -1);
+
+        if ($this->db->connection->query($query)) {
+            $last_id = $this->db->connection->insert_id;
+            $added_rows = [];
+            for ($i = $last_id - count($data) + 1; $i <= $last_id; $i++) {
+                $result = $this->db->connection->query("SELECT * FROM d_technologies WHERE id_tech = $i");
+                $row = $result->fetch_assoc();
+                $added_rows[] = $row['id_tech'];
+            }
+            return $added_rows;
+        } else {
+            return false;
+        }
+    }
+    
 }

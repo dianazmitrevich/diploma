@@ -36,4 +36,19 @@ class CompletedController extends Controller
 
         echo json_encode($error);
     }
+
+    public function remove()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $error = [];
+
+            $question_id = $_POST['question_id'];
+            $user_id = $_POST['user_id'];
+
+            $this->completed->remove($question_id, $user_id);
+            $error['ok'] = 1;
+        }
+
+        echo json_encode($error);
+    }
 }

@@ -5,6 +5,7 @@
       }
    },
    "require": {
-      "phpmailer/phpmailer": "^6.8"
+      "phpmailer/phpmailer": "^6.8",
+      "vearutop/php-obscene-censor-rus": "^1.0"
    }
 }

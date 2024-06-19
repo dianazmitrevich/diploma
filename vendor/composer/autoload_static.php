@@ -11,6 +11,10 @@ class ComposerStaticInitb670bcae263f861c334340d17171cd3a
         array (
             'app\\' => 4,
         ),
+        'W' => 
+        array (
+            'Wkhooy\\' => 7,
+        ),
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
@@ -21,6 +25,10 @@ class ComposerStaticInitb670bcae263f861c334340d17171cd3a
         'app\\' => 
         array (
             0 => __DIR__ . '/../..' . '/',
+        ),
+        'Wkhooy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vearutop/php-obscene-censor-rus/src',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (

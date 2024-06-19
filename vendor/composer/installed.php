@@ -28,5 +28,14 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'vearutop/php-obscene-censor-rus' => array(
+            'pretty_version' => 'v1.0.2',
+            'version' => '1.0.2.0',
+            'reference' => 'f0f489ae0eac4ee15c0c8130dea97e47303fe5e0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../vearutop/php-obscene-censor-rus',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
     ),
 );

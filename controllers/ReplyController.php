@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\Reply;
+use Wkhooy\ObsceneCensorRus;
 
 class ReplyController extends Controller
 {
@@ -20,14 +21,14 @@ class ReplyController extends Controller
             $error = [];
 
             if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
-
                 if (isset($_POST['reply_id'])) {
                     $reply_id = $_POST['reply_id'];
                 } else {
                     $reply_id = null;
                 }
+
                 $question_id = $_POST['question_id'];
-                $text = $_POST['text'];
+                $text = ObsceneCensorRus::getFiltered($_POST['text']);
 
                 if ($text) {
                     $this->reply->add($question_id, $text, $this->getUser()['id_user'], $reply_id);
@@ -45,7 +46,7 @@ class ReplyController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = [];
     
-            if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
+            if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S' || $this->getUser()['role'] == 'R') {
     
                 $reply_id = $_POST['question_id'];
                 $user_id = $_POST['user_id'];
@@ -66,7 +67,7 @@ class ReplyController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = [];
     
-            if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S') {
+            if ($this->getUser()['role'] == 'U' || $this->getUser()['role'] == 'S' || $this->getUser()['role'] == 'R') {
     
                 $reply_id = $_POST['question_id'];
                 $user_id = $_POST['user_id'];

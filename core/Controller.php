@@ -2,11 +2,10 @@
 
 namespace app\core;
 
-use app\lib\Database;
-use app\models\Topic;
 use app\models\User;
 use DateTime;
-use IntlDateFormatter;
+use DateTimeZone;
+use Wkhooy\ObsceneCensorRus;
 
 abstract class Controller
 {
@@ -40,31 +39,39 @@ abstract class Controller
         }
     }
 
-    // public function formatDate(string $timestamp): string {
-    //     $date = new DateTime($timestamp);
-    //     $formatter = new IntlDateFormatter('ru_RU', IntlDateFormatter::SHORT, IntlDateFormatter::SHORT, 'Europe/Moscow', IntlDateFormatter::GREGORIAN, 'd MMMM HH:mm');
-    //     return $formatter->format($date);
-    // }
-
     public function formatDate($timestamp){
-        $date = new DateTime($timestamp);
-        $now = new DateTime();
-        $interval = $date->diff($now);
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $timestamp, new DateTimeZone('Europe/Minsk'));
+        if (!$date) {
+            return 'Неверный timestamp';
+        }
+    
+        $now = new DateTime('now', new DateTimeZone('Europe/Minsk'));
+        $interval = $now->diff($date);
     
         if ($interval->y >= 1) {
-            return $date->format('d m Y');
+            return $interval->y . ' год(а) назад';
         } elseif ($interval->m >= 1) {
-            return $interval->m . 'м';
+            return $interval->m . ' месяц(а) назад';
         } elseif ($interval->d >= 7) {
-            return floor($interval->d / 7) . 'нд';
+            return floor($interval->d / 7) . ' неделю(и) назад';
         } elseif ($interval->d >= 1) {
-            return $interval->d . 'дн';
+            return $interval->d . ' день(дней) назад';
         } elseif ($interval->h >= 1) {
-            return $interval->h . 'ч';
+            return $interval->h . ' час(ов) назад';
         } elseif ($interval->i >= 1) {
-            return $interval->i . 'мин';
+            return $interval->i . ' минут(ы) назад';
         } else {
-            return $interval->s . 'с';
+            return $interval->s . ' секунд(ы) назад';
         }
+    }
+
+    public function mainValidate($params) {
+        $errors = [];
+        foreach ($params as $paramName => $paramValue) {
+            if (!ObsceneCensorRus::isAllowed($paramValue)) {
+                $errors[$paramName] = 'Надо написать что-то без использования нецензурщины.';
+            }
+        }
+        return $errors;
     }
 }

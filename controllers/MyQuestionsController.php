@@ -26,7 +26,13 @@ class MyQuestionsController extends Controller
     }
 
     public function getMyQuestions() {
-        return $this->question->findByAuthor($this->getUser()['id_user']);
+        $my_questions = $this->question->findByAuthor($this->getUser()['id_user']);
+
+        foreach ($my_questions as $key => $row) {
+            $my_questions[$key]['tags'] = $this->question->getTechnologiesList($row['id_question']);
+        }
+
+        return $my_questions;
     }
 
     public function getMyTopics() {

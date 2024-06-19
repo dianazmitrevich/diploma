@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // let table = document.querySelector(".profile-table .table__item table");
+    // for (let item of table.querySelectorAll("tbody tr:nth-child(n+5)")) {
+    //     item.style.display = "none";
+    // }
+
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("popup__wrap")) {
             document.querySelectorAll(".popup__wrap, .dropdown__wrap, .popup-wrap, .dropdown-wrap").forEach((w) => {
@@ -65,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             api = element.getAttribute("data-api") ? element.getAttribute("data-api") : "";
             user = element.getAttribute("data-user") ? element.getAttribute("data-user") : "";
+            item = element.getAttribute("data-item") ? element.getAttribute("data-item") : "";
 
             fetch(element.getAttribute("data-url"), {
                 method: "POST",
@@ -72,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     element_id: element.getAttribute("data-id"),
                     api: api,
                     user: user,
+                    item: item,
                 }),
                 headers: { "X-Requested-With": "XMLHttpRequest" },
             })
@@ -184,33 +191,289 @@ document.addEventListener("DOMContentLoaded", () => {
 
             document.querySelector(".detail__col-info").classList.remove("info-blured");
         }
+
+        if (e.target.classList.contains("btn-red")) {
+            let table = e.target.closest(".table__item");
+            let items = table.querySelectorAll("tbody tr");
+
+            if (e.target.textContent === "Показать еще") {
+                for (let item of items) {
+                    item.style.display = "";
+                }
+                e.target.textContent = "Скрыть";
+            } else {
+                for (let i = 4; i < items.length; i++) {
+                    items[i].style.display = "none";
+                }
+                e.target.textContent = "Показать еще";
+            }
+        }
+
+        document.querySelectorAll(".form__field-hinted.hinted-company").forEach(function (field) {
+            let inputField = field.querySelector('input[name="company"]');
+            let hiddenField = field.querySelector('input[name="company_id"]');
+            let hintList = field.querySelector(".field-hints");
+
+            if (!hintList) {
+                hintList = document.createElement("ul");
+                hintList.className = "field-hints";
+                hintList.style.display = "none";
+                field.appendChild(hintList);
+            }
+
+            inputField.addEventListener("input", function (e) {
+                let inputValue = e.target.value;
+                if (inputValue === "") {
+                    hiddenField.value = "";
+                    hintList.innerHTML = "";
+                    hintList.style.display = "none";
+                    return;
+                }
+                fetch("/api/companies")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let matches = data.filter((item) =>
+                            item.name.toLowerCase().startsWith(inputValue.toLowerCase())
+                        );
+                        hintList.innerHTML = "";
+                        if (matches.length > 0) {
+                            matches.forEach((item) => {
+                                let listItem = document.createElement("li");
+                                listItem.textContent = item.name;
+                                listItem.addEventListener("click", function (event) {
+                                    event.stopPropagation();
+                                    inputField.value = item.name;
+                                    hiddenField.value = item.id_company;
+                                    hintList.innerHTML = "";
+                                    hintList.style.display = "none";
+                                });
+                                hintList.appendChild(listItem);
+                            });
+                            hintList.style.display = "block";
+                        } else {
+                            hintList.style.display = "none";
+                        }
+                    });
+            });
+
+            inputField.addEventListener("change", function (e) {
+                if (e.target.value === "") {
+                    hiddenField.value = "";
+                    hintList.innerHTML = "";
+                    hintList.style.display = "none";
+                }
+            });
+        });
+
+        document.querySelectorAll(".form__field-hinted.hinted-techs").forEach(function (field) {
+            let inputField = field.querySelector('input[name="tech"]');
+            let hiddenField = field.querySelector('input[name="techs_list"]');
+            let hintList = field.querySelector(".field-hints");
+            let techsDiv = field.querySelector(".techs");
+
+            if (!hintList) {
+                hintList = document.createElement("ul");
+                hintList.className = "field-hints";
+                hintList.style.display = "none";
+                field.appendChild(hintList);
+            }
+
+            inputField.addEventListener("input", function (e) {
+                let inputValue = e.target.value;
+                if (inputValue === "") {
+                    hintList.innerHTML = "";
+                    hintList.style.display = "none";
+                    return;
+                }
+                fetch("/api/techs")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let matches = data.filter((item) =>
+                            item.name.toLowerCase().startsWith(inputValue.toLowerCase())
+                        );
+                        hintList.innerHTML = "";
+                        if (matches.length > 0) {
+                            matches.forEach((item) => {
+                                let listItem = document.createElement("li");
+                                listItem.textContent = item.name;
+                                listItem.addEventListener("click", function (event) {
+                                    event.stopPropagation();
+                                    hiddenField.value = hiddenField.value
+                                        ? hiddenField.value + "," + item.id_tech
+                                        : item.id_tech;
+                                    hintList.innerHTML = "";
+                                    hintList.style.display = "none";
+                                    let techItem = document.createElement("div");
+                                    techItem.className = "techs-item";
+                                    techItem.innerHTML =
+                                        '<img src="/resources/img/multi-remove.svg" alt=""><p>' + item.name + "</p>";
+                                    techItem.querySelector("img").addEventListener("click", function (event) {
+                                        event.stopPropagation();
+                                        techItem.remove();
+                                        let techs = hiddenField.value.split(",");
+                                        let index = techs.indexOf(item.id_tech);
+                                        if (index > -1) {
+                                            techs.splice(index, 1);
+                                        }
+                                        hiddenField.value = techs.join(",");
+                                    });
+                                    techsDiv.appendChild(techItem);
+                                    inputField.value = ""; // Очистка поля inputField после клика на элемент из списка
+                                });
+                                hintList.appendChild(listItem);
+                            });
+                        } else {
+                            let listItem = document.createElement("li");
+                            listItem.textContent = inputValue;
+                            listItem.addEventListener("click", function (event) {
+                                event.stopPropagation();
+                                hiddenField.value = hiddenField.value
+                                    ? hiddenField.value + "," + inputValue
+                                    : inputValue;
+                                hintList.innerHTML = "";
+                                hintList.style.display = "none";
+                                let techItem = document.createElement("div");
+                                techItem.className = "techs-item";
+                                techItem.innerHTML =
+                                    '<img src="/resources/img/multi-remove.svg" alt=""><p>' + inputValue + "</p>";
+                                techItem.querySelector("img").addEventListener("click", function (event) {
+                                    event.stopPropagation();
+                                    techItem.remove();
+                                    let techs = hiddenField.value.split(",");
+                                    let index = techs.indexOf(inputValue);
+                                    if (index > -1) {
+                                        techs.splice(index, 1);
+                                    }
+                                    hiddenField.value = techs.join(",");
+                                });
+                                techsDiv.appendChild(techItem);
+                                inputField.value = ""; // Очистка поля inputField после клика на элемент из списка
+                            });
+                            hintList.appendChild(listItem);
+                        }
+                        hintList.style.display = "block";
+                    });
+            });
+
+            inputField.addEventListener("change", function (e) {
+                if (e.target.value === "") {
+                    hintList.innerHTML = "";
+                    hintList.style.display = "none";
+                }
+            });
+        });
+
+        if (e.target.classList.contains("item__option") && e.target.closest(".select-main-topic")) {
+            let dataTopic = e.target.parentNode.dataset.topic;
+            e.target.closest(".select-main-topic").querySelector(".field-invalid").classList.remove("inc_topic");
+            e.target.closest(".select-main-topic").querySelector("input[type='hidden']").name = "";
+
+            let selectedTab = e.target
+                .closest(".select-main-topic")
+                .parentNode.querySelector(`.form__field[data-topic="${dataTopic}"]`);
+
+            e.target
+                .closest(".select-main-topic")
+                .parentNode.querySelectorAll(`.select-subtopic`)
+                .forEach((element) => {
+                    element.style.display = "none";
+
+                    element.querySelector("input[type='hidden']").removeAttribute("value");
+                    element.querySelector("input[type='hidden']").name = "";
+                    element.querySelector(".field-invalid").classList.remove("inc_topic");
+                    element.querySelector(".item__head span").innerHTML = "Выберите подтему";
+                });
+
+            selectedTab.style.display = "block";
+            selectedTab.querySelector("input[type='hidden']").name = "topic";
+            selectedTab.querySelector(".field-invalid").classList.add("inc_topic");
+        }
     });
+
+    // document.addEventListener("submit", (e) => {
+    //     e.preventDefault();
+    //     let formData = new FormData(e.target);
+    //     let url = e.target.getAttribute("data-url");
+    //     fetch(url, {
+    //         method: "POST",
+    //         body: formData,
+    //         headers: { "X-Requested-With": "XMLHttpRequest" },
+    //     })
+    //         .then((res) => {
+    //             return res.json();
+    //         })
+    //         .then((data) => {
+    //             console.log(data);
+    //             if (data && !data["ok"]) {
+    //                 Object.keys(data).forEach((element) => {
+    //                     let invalid = e.target.querySelector("." + element);
+    //                     invalid.classList.add("show");
+    //                     invalid.querySelector("p").innerHTML = data[element];
+    //                 });
+    //             } else {
+    //                 location.reload();
+    //             }
+    //         })
+    //         .catch((error) => console.log(error));
+    // });
 
     document.addEventListener("submit", (e) => {
         e.preventDefault();
-        let formData = new FormData(e.target);
-        let url = e.target.getAttribute("data-url");
+
+        if (e.target.classList.contains("confirm-remove")) {
+            document.querySelector(".confirm__wrap").classList.add("show");
+            document.querySelector(".confirm-wrap").classList.add("show");
+            document.querySelector(".confirm__wrap .wrap__text").innerHTML = e.target.getAttribute("data-confirm");
+            document.querySelector(".confirm__wrap .btn-yellow").innerHTML = e.target.getAttribute("data-positive");
+            document.body.classList.add("stop-scroll");
+
+            function resetConfirmModal() {
+                document.querySelector(".confirm__wrap").classList.remove("show");
+                document.querySelector(".confirm-wrap").classList.remove("show");
+                document.body.classList.remove("stop-scroll");
+            }
+            console.log(e.target);
+
+            document.querySelector(".confirm .btn-yellow").addEventListener("click", () => {
+                sendForm(e.target);
+                resetConfirmModal();
+            });
+
+            document.querySelector(".confirm .btn-grey").addEventListener("click", () => {
+                resetConfirmModal();
+            });
+        } else {
+            sendForm(e.target);
+        }
+    });
+
+    function sendForm(form) {
+        let formData = new FormData(form);
+        let url = form.getAttribute("data-url");
         fetch(url, {
             method: "POST",
             body: formData,
             headers: { "X-Requested-With": "XMLHttpRequest" },
         })
-            .then((res) => {
-                return res.json();
-            })
+            .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 if (data && !data["ok"]) {
                     Object.keys(data).forEach((element) => {
-                        let invalid = e.target.querySelector("." + element);
+                        let invalid = form.querySelector("." + element);
                         invalid.classList.add("show");
                         invalid.querySelector("p").innerHTML = data[element];
                     });
                 } else {
-                    location.reload();
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                    } else {
+                        location.reload();
+                    }
                 }
             })
             .catch((error) => console.log(error));
-    });
+    }
 
     document.querySelectorAll(".checkboxes-ajax").forEach((checkboxAjax) => {
         let checkboxes = checkboxAjax.querySelectorAll("input[type=checkbox]");
@@ -275,6 +538,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         checked: hiddenInput.value,
                         element_id: checkboxAjax.getAttribute("data-element"),
                         api: checkboxAjax.getAttribute("data-api"),
+                        user_id: checkboxAjax.getAttribute("data-user"),
+                        user_role: checkboxAjax.getAttribute("data-role"),
+                        topic_id: checkboxAjax.getAttribute("data-topic"),
                     }),
                     headers: { "X-Requested-With": "XMLHttpRequest" },
                 })
@@ -282,7 +548,21 @@ document.addEventListener("DOMContentLoaded", () => {
                         return res.json();
                     })
                     .then((data) => {
-                        document.getElementById(data["selector"]).innerHTML = data["html"];
+                        console.log(data);
+                        if (data["selector"]) {
+                            document.getElementById(data["selector"]).innerHTML = data["html"];
+                        }
+
+                        if (data["percent"] || data["percent"] === 0) {
+                            document.querySelector(
+                                ".progress-circle .circle__item"
+                            ).style = `--percent: ${data["percent"]}`;
+                            document.querySelector(".progress-circle .circle__item p").innerHTML =
+                                data["percent"] + "%";
+                            document.querySelector(
+                                ".progress-circle .circle__text .done span"
+                            ).innerHTML = `${data["completed_count"]}/${data["topic_count"]}`;
+                        }
                     })
                     .catch((error) => console.log(error));
             });

@@ -118,7 +118,6 @@ class Reply extends Model
         }
 
         return (new Rating)->updateRating($reply['author_id']);
-        // return 1;
     }
     
     public function findById(string $value) {
