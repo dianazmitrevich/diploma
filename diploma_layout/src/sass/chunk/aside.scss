@@ -1,0 +1,205 @@
+main aside.aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 252px;
+    background: #fff;
+    height: 100vh;
+
+    @include l-tablet {
+        width: 100%;
+        height: 60px;
+        z-index: 9999;
+    }
+
+    .aside__wrapper {
+        height: 100%;
+    }
+
+    .aside__row {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include l-tablet {
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+
+    .aside__col-upper {
+        @include l-tablet {
+            display: flex;
+            width: 100%;
+        }
+
+        .aside__logo {
+            background: $color-accent-d;
+            padding: 16px 0;
+            width: 100%;
+            display: block;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+
+            @include l-tablet {
+                max-width: 170px;
+                padding: 12px 0;
+            }
+        }
+
+        .aside__links {
+            margin-top: 25px;
+            padding: 0 30px;
+
+            @include l-tablet {
+                display: flex;
+                padding: 0 10px;
+                padding-right: 0;
+                max-width: calc(100% - 170px);
+                overflow: auto;
+                margin-top: 0;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    display: none;
+                }
+            }
+        }
+
+        .aside__link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+
+            @include l-tablet {
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
+
+            p {
+                @include l-tablet {
+                    white-space: nowrap;
+                    padding: 8.5px;
+                    padding-right: 17px;
+                    border-radius: 0 10px 10px 0;
+                    color: #fff;
+                }
+            }
+
+            &:hover {
+                img {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .link-img {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+                border-radius: 10px;
+
+                @include l-tablet {
+                    margin-right: 0;
+                    border-radius: 10px 0 0 10px;
+                    padding-left: 20px;
+                    padding-right: 9px;
+                }
+
+                img {
+                    transition: $transition;
+                }
+            }
+        }
+
+        .aside__link:nth-of-type(1) {
+            .link-img {
+                background: #32d5d5;
+            }
+
+            p {
+                @include l-tablet {
+                    background: #32d5d5;
+                }
+            }
+        }
+
+        .aside__link:nth-of-type(2) {
+            .link-img {
+                background: #e55dfc;
+            }
+
+            p {
+                @include l-tablet {
+                    background: #e55dfc;
+                }
+            }
+        }
+
+        .aside__link:nth-of-type(3) {
+            .link-img {
+                background: #ff5722;
+            }
+
+            p {
+                @include l-tablet {
+                    background: #ff5722;
+                }
+            }
+        }
+
+        .aside__link:nth-of-type(4) {
+            .link-img {
+                background: $color-accent;
+            }
+
+            p {
+                @include l-tablet {
+                    background: $color-accent;
+                }
+            }
+        }
+    }
+
+    .aside__links {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .aside__col-lower {
+        padding: 0 30px;
+        padding-bottom: 40px;
+
+        @include l-tablet {
+            display: none;
+        }
+
+        .aside__link {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .link-logout {
+            color: #ff3e24;
+            margin-bottom: 0;
+
+            .link-img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            p {
+                display: block;
+                margin-left: 10px;
+            }
+        }
+    }
+}

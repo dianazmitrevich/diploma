@@ -1,0 +1,27 @@
+.bonnet {
+    .bonnet__wrapper {
+        padding-bottom: 40px;
+
+        @include sm-tablet {
+            padding-bottom: 20px;
+        }
+    }
+
+    .bonnet__line {
+        font-size: 18px;
+        font-weight: 700;
+
+        @include sm-tablet {
+            font-size: 16px;
+        }
+
+        span {
+            color: #a6a6a6;
+        }
+    }
+
+    .bonnet__title {
+        margin-top: 24px;
+        margin-bottom: 0px;
+    }
+}

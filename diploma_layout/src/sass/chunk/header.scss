@@ -1,0 +1,164 @@
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - 252px);
+    z-index: 99;
+    backdrop-filter: blur(10px);
+
+    @include l-tablet {
+        width: 100%;
+        top: 60px;
+    }
+}
+
+.header__desktop {
+    @include l-tablet {
+        // display: none;
+    }
+}
+
+.header__mobile {
+    display: none;
+
+    @include l-tablet {
+        // display: block;
+    }
+}
+
+.header__wrapper {
+    margin: 10px;
+}
+
+.header__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__col {
+    display: flex;
+}
+
+.header__btn {
+    margin-right: 10px;
+
+    @include l-tablet {
+        display: none;
+    }
+}
+
+.header__links {
+    display: flex;
+    align-items: center;
+
+    @include l-tablet {
+        display: none;
+    }
+
+    a {
+        display: block;
+        margin-right: 10px;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 11px 22px;
+    }
+}
+
+.header__question {
+    display: none;
+
+    @include l-tablet {
+        display: block;
+    }
+}
+
+.header__dropdown {
+    display: none;
+    position: relative;
+
+    @include l-tablet {
+        display: block;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
+
+    .dropdown__wrap {
+        opacity: 0;
+        min-width: 250px;
+        visibility: hidden;
+        background: #fff;
+        border-radius: 10px;
+        position: absolute;
+        top: 54px;
+        left: 0;
+        padding: 30px 20px;
+        box-shadow: 0 12px 40px 0 rgba($color: #274451, $alpha: 0.08);
+
+        .links {
+            a {
+                display: block;
+                margin-bottom: 10px;
+                font-size: 14px;
+
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .logout {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+
+            .link-img {
+                width: 24px;
+                height: 24px;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.header__profile {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 34.5px;
+    font-size: 18px;
+    font-weight: 700;
+
+    .profile__name {
+        margin-right: 40px;
+        margin-left: 19px;
+    }
+
+    .profile__rating {
+        color: $color-accent;
+        margin-right: 10px;
+    }
+
+    .profile__image {
+        .image-wrap {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

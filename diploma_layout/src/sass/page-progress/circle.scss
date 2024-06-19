@@ -1,0 +1,63 @@
+.progress-circle {
+    .circle__wrapper {
+        display: flex;
+        align-items: center;
+
+        @include sm-tablet {
+            flex-direction: column-reverse;
+        }
+    }
+
+    .circle__item {
+        --percent: 0;
+        width: 200px;
+        min-width: 200px;
+        height: 200px;
+        min-height: 200px;
+        background: conic-gradient($color-accent calc(var(--percent) * 1%), #d9d9d9 calc(var(--percent) * 1%));
+        border-radius: 50%;
+        position: relative;
+
+        p {
+            font-size: 28px;
+            font-weight: 700;
+            width: 147px;
+            height: 147px;
+            background: #f3f3f3;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .circle__text {
+        margin-left: 40px;
+        max-width: 560px;
+
+        @include sm-tablet {
+            margin-left: 0;
+            max-width: 100%;
+            margin-bottom: 40px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .done {
+            font-weight: 700;
+            font-size: 18px;
+
+            span {
+                color: $color-accent;
+            }
+        }
+    }
+}

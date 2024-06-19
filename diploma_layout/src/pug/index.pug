@@ -1,0 +1,34 @@
+extends layout/app
+
+block page
+   div(class="g-wrap global index-page")
+      div(class="outer-bg")
+         include index/chunk/header
+         main(class="g-main")
+            section.index-banner.banner.content-block
+               .banner__wrapper.container
+                  .banner-wrap
+                     img(src="img/index-banner.png", alt="")
+                  .banner__wrap
+                     .banner__title Подготовка к собеседованиям в IT с полным погружением
+                     a.btn Перейти к темам
+                     .banner__items
+                        .banner__item
+                           img(src="img/banner-icon-1.svg", alt="")
+                           p Получайте быструю обратную связь
+                        .banner__item
+                           img(src="img/banner-icon-2.svg", alt="")
+                           p Отслеживайте свой прогресс
+                        .banner__item
+                           img(src="img/banner-icon-3.svg", alt="")
+                           p Занимайтесь подготовкой в любое удобное время
+            section.index-profile.profile.content-block
+               .profile__wrapper.container
+                  .profile__row
+                     .profile__col
+                        .profile__title Ваш личный кабинет для подготовки
+                        .profile__text Они прошли специальное внутреннее обучение, сдали экзамен и готовы справиться с чем угодно. Понятно объяснят любую тему: от глагола to be до косвенной речиПомогут решить практические задачи: например, подготовят к собеседованию
+                     .profile__col.profile__col-right
+                        a.btn Перейти
+                        img(src="img/index-profile.png", alt="")
+            include index/chunk/footer

@@ -1,0 +1,30 @@
+.empty-block {
+    .empty__wrapper {
+        padding: 60px 0;
+    }
+
+    .empty__row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .empty__col-image {
+        margin-bottom: 15px;
+    }
+
+    .empty__title {
+        text-align: center;
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .empty__subtitle {
+        max-width: 275px;
+        font-size: 12px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

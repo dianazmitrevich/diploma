@@ -1,0 +1,32 @@
+.select-theme.theme.content-section
+    .theme__wrapper.container
+        .theme__box
+            .theme__col.theme__col-left
+                p Выбранное направление – <span>Frontend разработчик</span>
+            .theme__col.theme__col-right
+                .select
+                    .select__item
+                        .item
+                            .item__head
+                                span Выберите направление
+                                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1L5 5L9 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            .item__options
+                                input(type="hidden", name="")
+                                .option-wrap
+                                    input.item__option(type="radio", name="", data-text="Frontend разработчик", data-selected-value="1")
+                                    label Frontend разработчик
+                                .option-wrap
+                                    input.item__option(type="radio", name="", data-text="Backend разработчик", data-selected-value="2")
+                                    label Backend разработчик
+                                .option-wrap
+                                    input.item__option(type="radio", name="", data-text="gregr", data-selected-value="4")
+                                    label gregr
+                                .option-wrap
+                                    input.item__option(type="radio", name="", data-text="gergreger5t43", data-selected-value="5")
+                                    label gergreger5t43
+                                .option-wrap
+                                    input.item__option(type="radio", name="", data-text="vfdvdv", data-selected-value="6")
+                                    label vfdvdv
+                .btn Выбрать

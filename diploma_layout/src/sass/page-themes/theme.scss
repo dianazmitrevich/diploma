@@ -1,0 +1,140 @@
+.theme-item {
+    display: block;
+    background: #fff;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 20px 40px 20px 40px;
+    width: calc((100% - 20px) / 3);
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 600;
+    transition: $transition;
+
+    @include l-tablet {
+        width: calc((100% - 10px) / 2);
+        margin-right: 10px;
+
+        &:nth-of-type(2n) {
+            margin-right: 0;
+        }
+    }
+
+    @include sm-tablet {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 rgba($color: #274451, $alpha: 0.08);
+    }
+
+    &:nth-of-type(3n) {
+        margin-right: 0;
+    }
+
+    &:nth-of-type(3n-2) {
+        margin-bottom: 10px;
+    }
+
+    &:before {
+        position: absolute;
+        top: 50%;
+        left: -24px;
+        transform: translateY(-50%);
+        width: 37px;
+        height: 37px;
+        border-radius: 50%;
+        background: #f3f3f3;
+        content: "";
+    }
+
+    span {
+        display: block;
+        color: #bfbfbf;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    p.validated {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 37px;
+        height: 37px;
+        background: #ff3e24;
+        border-radius: 50%;
+    }
+}
+
+.theme-list {
+    .theme__items {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .theme__item {
+        @include l-tablet {
+            width: calc((100% - 10px) / 2);
+            margin-right: 10px;
+
+            &:nth-of-type(2n) {
+                margin-right: 0;
+            }
+        }
+
+        @include sm-tablet {
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    .theme__single:last-of-type {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .theme__more {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 10px;
+        padding: 16px 16px 16px 20px;
+
+        @include sm-tablet {
+            flex-direction: column;
+        }
+
+        p {
+            max-width: 350px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #878787;
+            margin-right: 40px;
+
+            @include sm-tablet {
+                font-size: 12px;
+                text-align: left;
+                max-width: 100%;
+                width: 100%;
+                margin-right: 0;
+            }
+
+            span,
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        .btn {
+            @include sm-tablet {
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    }
+}

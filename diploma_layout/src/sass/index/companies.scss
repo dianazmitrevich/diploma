@@ -1,0 +1,49 @@
+.companies-item {
+    background: #fff;
+    border-radius: 10px;
+    width: calc((100% - 20px) / 3);
+    min-width: calc((100% - 20px) / 3);
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 700;
+
+    .item__row {
+        padding: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .item__image {
+        width: 250px;
+        height: 80px;
+        margin-bottom: 26px;
+        overflow: hidden;
+    }
+
+    .item__questions {
+        margin-bottom: 5px;
+    }
+}
+
+.companies-block {
+    .companies__item:last-of-type {
+        margin-right: 0;
+    }
+
+    .companies__items {
+        display: flex;
+        overflow: auto;
+        padding-bottom: 10px;
+
+        &::-webkit-scrollbar {
+            background: #e6e6e6;
+            height: 10px;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $color-accent;
+            border-radius: 10px;
+        }
+    }
+}

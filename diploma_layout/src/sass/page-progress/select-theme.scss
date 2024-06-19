@@ -1,0 +1,31 @@
+.select-theme {
+    .theme__box {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px 16px 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .theme__col-left {
+        font-size: 14px;
+        color: #878787;
+        font-weight: 600;
+
+        span {
+            color: $color-accent;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+    }
+
+    .theme__col-right {
+        display: flex;
+        align-items: center;
+
+        .select {
+            margin-right: 10px;
+        }
+    }
+}

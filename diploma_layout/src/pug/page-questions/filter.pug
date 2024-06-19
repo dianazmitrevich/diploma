@@ -1,0 +1,48 @@
+.questions-filter.filter
+    .filter__wrapper.container
+        .filter__tabs.tabs
+            .tabs__upper
+                .tabs__item.selected(data-detail="1") Технологии
+                .tabs__item(data-detail="2") Уровень
+                .tabs__item(data-detail="3") Компании
+            .tabs__lower
+                .tabs__detail.detail.selected(data-detail="1")
+                    .detail__boxes
+                        .checkbox
+                            input(type="checkbox", name="" id="c_1")
+                            label(for="c_1") Swift
+                        .checkbox
+                            input(type="checkbox", name="" id="c_2")
+                            label(for="c_2") Xamarin
+                        .checkbox
+                            input(type="checkbox", name="" id="c_3")
+                            label(for="c_3") Vue.js
+                        .checkbox
+                            input(type="checkbox", name="" id="c_4")
+                            label(for="c_4") Python
+                .tabs__detail.detail(data-detail="2")
+                    .detail__boxes
+                        .checkbox
+                            input(type="checkbox", name="" id="c_5")
+                            label(for="c_5") Мидл
+                .tabs__detail.detail(data-detail="3")
+                    .detail__boxes
+                        .checkbox
+                            input(type="checkbox", name="" id="c_6")
+                            label(for="c_6") EPAM Systems
+                        .checkbox
+                            input(type="checkbox", name="" id="c_7")
+                            label(for="c_7") Modsen
+                        .checkbox
+                            input(type="checkbox", name="" id="c_8")
+                            label(for="c_8") LeverX
+                        .checkbox
+                            input(type="checkbox", name="" id="c_9")
+                            label(for="c_9") IBA GROUP
+                        .checkbox
+                            input(type="checkbox", name="" id="c_10")
+                            label(for="c_10") Melsoft
+        .filter__text
+            p Выбранные технологии: Xamarin
+            p Выбранные уровни: -
+            p Выбранные компании: -

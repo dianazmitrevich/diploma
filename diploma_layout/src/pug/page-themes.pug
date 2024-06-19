@@ -1,0 +1,58 @@
+extends layout/app
+
+block page
+   div(class="g-wrap global")
+      div(class="outer-bg")
+         include chunk/header
+         main(class="g-main")
+            aside.aside
+               div.aside__wrapper
+                  div.aside__row
+                     div.aside__col.aside__col-upper
+                        a.aside__logo(href="index.html")
+                           img(src="img/logo.svg", alt="")
+                        div.aside__links
+                           a.aside__link(href="index.html")
+                              div.link-img
+                                 img(src="img/aside-1.svg", alt="")
+                              p Главная
+                           a.aside__link(href="page-questions.html")
+                              div.link-img
+                                 img(src="img/aside-2.svg", alt="")
+                              p Мои вопросы
+                           a.aside__link(href="page-progress.html")
+                              div.link-img
+                                 img(src="img/aside-3.svg", alt="")
+                              p Прогресс
+                           a.aside__link(href="page-vacancies.html")
+                              div.link-img
+                                 img(src="img/aside-4.svg", alt="")
+                              p Вакансии
+                     div.aside__col.aside__col-lower
+                        div.aside__links
+                           a.aside__link
+                              p Партнеры
+                           a.aside__link
+                              p FAQ
+                           a.aside__link
+                              p Настройки     
+                           a.aside__link.link-logout
+                              div.link-img
+                                 img(src="img/aside-log-out.svg", alt="")
+                              p Выйти
+            section.content
+               div.content__wrapper
+                  include page-themes/bonnet
+                  include page-themes/filter
+                  include page-themes/theme
+            .confirm
+               .confirm__wrapper
+                  .confirm-wrap
+                  .confirm__wrap
+                     .wrap
+                        .wrap__title ⚠️ Уведомление
+                        .wrap__text Удалить данный вопрос?
+                        .wrap__btns
+                           .btn.btn-yellow Удалить
+                           .btn.btn-grey Отмена
+            include chunk/footer

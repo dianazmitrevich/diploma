@@ -1,0 +1,47 @@
+.my-themes-list {
+    .list__items {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .list__more {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        border-radius: 10px;
+        padding: 16px 16px 16px 20px;
+
+        @include sm-tablet {
+            flex-direction: column;
+        }
+
+        p {
+            max-width: 350px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #878787;
+
+            @include sm-tablet {
+                font-size: 12px;
+                text-align: left;
+                max-width: 100%;
+                width: 100%;
+                margin-right: 0;
+            }
+
+            span,
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        .btn {
+            @include sm-tablet {
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    }
+}

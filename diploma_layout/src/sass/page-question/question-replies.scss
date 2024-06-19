@@ -1,0 +1,255 @@
+.question-replies {
+    .replies__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .h3 {
+            margin-bottom: 0;
+        }
+
+        .select .item {
+            font-size: 14px;
+        }
+    }
+
+    .replies__item {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 1px;
+
+        .item__row {
+            margin-bottom: 10px;
+            margin-bottom: 30px;
+
+            .item__rate {
+                margin-top: 0;
+            }
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+
+        .item__upper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .item__date {
+                margin-left: 20px;
+            }
+        }
+
+        .item__text {
+            font-size: 14px;
+            line-height: 20px;
+            margin-bottom: 20px;
+            margin-left: 40px;
+
+            @include sm-tablet {
+                font-size: 13px;
+                line-height: 18px;
+                margin-left: 0;
+            }
+        }
+
+        .item__author {
+            display: flex;
+            align-items: center;
+        }
+
+        .item__author-image {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
+
+        .item__author-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .item__date {
+            font-size: 12px;
+            font-weight: 600;
+            color: #b7b7b7;
+        }
+
+        .item__row-sm {
+            padding-left: 40px;
+            margin-bottom: 20px;
+            border-left: 2px solid #eeeeee;
+
+            @include sm-tablet {
+                padding-left: 20px;
+            }
+
+            .item__upper {
+                margin-bottom: 10px;
+            }
+        }
+
+        .item__reply-text {
+            font-size: 14px;
+            margin-right: 40px;
+        }
+
+        .item__rate {
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+            margin-top: 20px;
+
+            @include sm-tablet {
+                margin-left: 0;
+            }
+
+            .rate-block {
+                display: flex;
+                align-items: center;
+                margin-right: 25px;
+
+                input[type="checkbox"] {
+                    display: none;
+                }
+
+                input[type="checkbox"] + label {
+                    position: relative;
+                    cursor: pointer;
+                    min-height: 24px;
+                    width: 24px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                input[type="checkbox"] + label:before {
+                    content: "";
+                    width: 24px;
+                    height: 24px;
+                    position: absolute;
+                    left: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &.rate-up {
+                    input[type="checkbox"] + label:before {
+                        background-image: url(/resources/img/like.svg);
+                        background-repeat: no-repeat;
+                    }
+                }
+
+                &.rate-down {
+                    input[type="checkbox"] + label:before {
+                        background-image: url(/resources/img/dislike.svg);
+                        background-repeat: no-repeat;
+                    }
+                }
+
+                &.rate-up {
+                    input[type="checkbox"]:checked + label:before {
+                        background-image: url(/resources/img/like-fill.svg);
+                        background-repeat: no-repeat;
+                    }
+                }
+
+                &.rate-down {
+                    input[type="checkbox"]:checked + label:before {
+                        background-image: url(/resources/img/dislike-fill.svg);
+                        background-repeat: no-repeat;
+                    }
+                }
+
+                p {
+                    margin-left: 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                }
+            }
+
+            .rate-reply {
+                font-weight: 700;
+                font-size: 12px;
+                margin-left: 15px;
+                cursor: pointer;
+            }
+        }
+
+        .item__reply {
+            margin-top: 30px;
+            position: relative;
+            margin-left: 40px;
+
+            @include sm-tablet {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+
+            &:before {
+                position: absolute;
+                content: "";
+                bottom: 14px;
+                right: 11px;
+                background-image: url("/resources/img/checkbox.svg");
+                width: 18px;
+                height: 14px;
+                pointer-events: none;
+            }
+
+            p {
+                font-size: 14px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            .wrap {
+                display: flex;
+                align-items: center;
+            }
+
+            input[type="text"] {
+                width: calc(100% - 50px);
+                border-radius: 10px;
+                background: #f3f3f3;
+                border: 1px solid #d3d3d3;
+                font-size: 14px;
+                padding: 11px 22px;
+                outline: none;
+                margin-right: 10px;
+                font-family: $font-family;
+                font-weight: 600;
+
+                @include sm-tablet {
+                    font-size: 13px;
+                }
+
+                &::placeholder {
+                    font-family: $font-family;
+                    font-weight: 600;
+                }
+            }
+
+            input[type="submit"] {
+                border: none;
+                background: #39db2b;
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}

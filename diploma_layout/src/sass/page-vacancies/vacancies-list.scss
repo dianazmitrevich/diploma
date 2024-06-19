@@ -1,0 +1,116 @@
+.vacancies-item {
+    background: #fff;
+    border-radius: 10px;
+    width: calc((100% - 20px) / 3);
+    min-width: calc((100% - 20px) / 3);
+    margin-right: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    transition: $transition;
+
+    @include sm-tablet {
+        width: 100%;
+        margin-right: 0;
+        min-width: 100%;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px 0 rgba($color: #274451, $alpha: 0.08);
+    }
+
+    .item__row {
+        padding: 30px;
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .item__row-bottom {
+        padding-top: 0;
+        padding-bottom: 30px;
+        flex-direction: column;
+
+        .btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
+
+    .item__title {
+        margin-bottom: 10px;
+        max-width: 300px;
+        font-weight: 700;
+        padding-right: 20px;
+        max-width: 100%;
+        width: 100%;
+
+        &.btn-ajax {
+            cursor: pointer;
+        }
+    }
+
+    .item__tags {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .item__tag {
+        display: block;
+        background: $color-accent-d;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 10px;
+        padding: 5px 13px;
+        margin-right: 5px;
+        font-weight: 700;
+        width: fit-content;
+    }
+
+    .item__tag-company {
+        background: #ff3e24;
+    }
+
+    .item__tag-inq {
+        background: none;
+        color: #000;
+        font-size: 12px;
+        padding: 5px 8px;
+        font-weight: 600;
+    }
+
+    .item__text {
+        width: 100%;
+        height: 66px;
+        overflow: hidden;
+        font-size: 16px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+}
+
+@media (max-width: 1440px) {
+    .vacancies-item {
+        width: calc((100% - 10px) / 2);
+    }
+}
+
+.vacancies-list {
+    .list__items {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > div {
+            width: 100%;
+        }
+    }
+
+    .list__item:nth-of-type(3n) {
+        margin-right: 0;
+    }
+}

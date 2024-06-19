@@ -1,0 +1,280 @@
+$font-family: "Manrope", sans-serif;
+$font-weight: 600;
+$font-size: 16px;
+$color-accent: #34b1e8;
+$color-accent-d: #274451;
+$transition: all 0.2s ease-in-out;
+
+@mixin ph {
+    @media (max-width: 700px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: 575px) {
+        @content;
+    }
+}
+
+@mixin sm-tablet {
+    @media (max-width: 680px) {
+        @content;
+    }
+}
+
+@mixin l-tablet {
+    @media (max-width: 1000px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (max-width: 1479px) {
+        @content;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: $font-size;
+    line-height: 1;
+    scroll-behavior: smooth;
+    background: #f3f3f3;
+}
+
+/* ::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none;
+} */
+
+body {
+    font-size: 1rem;
+    font-family: $font-family;
+    font-weight: $font-weight;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: #000;
+}
+
+.container {
+    width: 100%;
+    position: relative;
+    max-width: 1220px;
+}
+
+.index-page {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 500px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 740px;
+    }
+}
+
+@media (min-width: 1140px) {
+    .container {
+        max-width: 1100px;
+    }
+}
+
+@media (min-width: 1480px) {
+    .container {
+        max-width: 1220px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+}
+
+.g-wrap {
+    min-width: 400px;
+    margin: 0 auto;
+}
+
+.outer-bg {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.popup {
+    z-index: 999;
+}
+
+.d-none {
+    display: none;
+}
+
+.stop-scroll {
+    overflow: hidden;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    position: relative;
+}
+
+.btn {
+    display: block;
+    background: $color-accent;
+    color: #fff;
+    padding: 11px 22px;
+    font-size: 16px;
+    font-weight: 700;
+    width: fit-content;
+    border-radius: 10px;
+    height: fit-content;
+    font-family: $font-family;
+    border: none;
+    cursor: pointer;
+    transition: $transition;
+    white-space: nowrap;
+
+    img,
+    svg {
+        pointer-events: none;
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: rotate(-1deg);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: rotate(1deg);
+    }
+}
+
+.btn:hover {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    filter: brightness(0.95);
+}
+
+.btn.btn-green {
+    background: #39db2b !important;
+}
+
+.btn.btn-grey {
+    background: #939393 !important;
+}
+
+.btn.btn-yellow {
+    background: #fad513 !important;
+    color: #000;
+}
+
+.btn.rect {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.btn-sm {
+    padding: 4px 18px;
+    border-radius: 10px;
+    font-size: 12px;
+    width: fit-content;
+    display: block;
+    font-family: $font-family;
+    font-weight: 700;
+    display: block;
+    border: none;
+}
+
+.btn-sm.btn-red {
+    background: #ff5722 !important;
+    color: #fff;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+// .anim-btn {
+//     position: relative;
+// }
+
+// .anim-btn::after {
+//     content: "";
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     width: 100px;
+//     height: 100px;
+//     background: radial-gradient(circle, #ff0, #f00, #80f);
+//     border-radius: 50%;
+//     z-index: -1;
+//     opacity: 0;
+// }
+
+// .anim-btn.active::after {
+//     animation: pop 0.5s ease forwards;
+// }
+
+.p-0 {
+    padding: 0 !important;
+}
+
+@import "index/*.scss";
+@import "chunk/*.scss";
+@import "page-themes/*.scss";
+@import "page-questions/*.scss";
+@import "page-question/*.scss";
+@import "page-my-questions/*.scss";
+@import "page-progress/*.scss";
+@import "page-vacancies/*.scss";
+@import "page-profile/*.scss";

@@ -1,0 +1,81 @@
+.themes-block {
+    .themes__items {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .themes__item {
+        font-weight: 600;
+        font-size: 20px;
+        border-radius: 10px;
+        background: #fff;
+        padding: 20px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .themes__item-selected {
+        background: #e55dfc;
+        color: #fff;
+    }
+
+    .themes__block {
+        display: none;
+        background: #fff;
+        border-radius: 10px;
+        width: 100%;
+
+        .block__row {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px;
+        }
+
+        .block__col-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .block__col-text {
+            max-width: 1000px;
+            font-size: 14px;
+        }
+
+        .block__col-right {
+            display: flex;
+            min-height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .block__col-questions,
+        .block__col-followers {
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: underline;
+            text-align: right;
+        }
+
+        .block__col-questions span {
+            color: #e55dfc;
+        }
+
+        .block__col-followers span {
+            color: $color-accent;
+        }
+
+        .block__col-cta {
+            display: block;
+            background: #fad513;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 11px 22px;
+            border-radius: 10px;
+        }
+    }
+
+    .themes__block-selected {
+        display: block;
+    }
+}

@@ -1,0 +1,15 @@
+.themes-filter {
+    .filter__wrapper {
+        padding-bottom: 40px;
+    }
+
+    .filter__boxes {
+        display: flex;
+        flex-wrap: wrap;
+
+        .checkbox {
+            margin-right: 60px;
+            margin-bottom: 10px;
+        }
+    }
+}

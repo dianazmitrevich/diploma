@@ -1,0 +1,24 @@
+.vacancies-filter,
+.progress-filter {
+    .filter__box {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .box-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .box-checkboxes {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+}

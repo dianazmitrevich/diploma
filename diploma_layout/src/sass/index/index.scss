@@ -1,0 +1,63 @@
+html:has(.index-page) {
+    background: #04121b;
+}
+
+.index-page {
+    background: #04121b;
+    color: #fff;
+
+    @include l-tablet {
+        .header {
+            top: 0;
+        }
+    }
+
+    .header {
+        width: 100%;
+
+        .header__wrapper {
+            margin: 15px 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .header__row,
+        .header__col {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__col-logo {
+            margin-right: 60px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+
+            a {
+                display: block;
+                margin-right: 40px;
+                color: #fff;
+                font-weight: 700;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .footer {
+        width: 100%;
+        margin-left: 0;
+
+        .footer__wrapper {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @include sm-tablet {
+            .container {
+                padding: 0;
+            }
+        }
+    }
+}
